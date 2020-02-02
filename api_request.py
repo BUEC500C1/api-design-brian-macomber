@@ -34,8 +34,7 @@ def api_request_Authentication():
 
     # third: POST oauth/access_token
     accessToken_url = "https://api.twitter.com/oauth/access_token"
-    accessToken_parameters = {'oauth_token': oauth_token_response[0][12:], 'oauth_verifier': oauth_verifier,
-        'oauth_consumer_key': secret.api_key}
+    accessToken_parameters = {'oauth_token': oauth_token_response[0][12:], 'oauth_verifier': oauth_verifier, 'oauth_consumer_key': secret.api_key}
     oauth_token = requests.get(accessToken_url, params=accessToken_parameters)
 
     print(oauth_token.status_code)  # make sure code is 200
