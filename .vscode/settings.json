@@ -2,5 +2,5 @@
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
-    "python.linting.flake8Args": ["--ignore=E128"]
+    "python.linting.flake8Args": ["--ignore=E128","--max-line-length=127"]
 }
