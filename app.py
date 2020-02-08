@@ -2,12 +2,18 @@
 Brian Macomber - U25993688
 References:
 https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask
+https://www.dataquest.io/blog/python-api-tutorial/
 '''
 
 import csv
+import json
 import flask
-from flask import jsonify
+# from flask import jsonify
 import requests
+from secret import api_key
+
+app = flask.Flask(__name__)
+app.config["DEBUG"] = True
 
 
 def getGeoCoords(ident):
@@ -16,54 +22,54 @@ def getGeoCoords(ident):
         for row in csv_reader:
             if ident == row[1]:
                 return (row[4], row[5])
+    return ("", "")
 
 
 def getAirportData(lat, lon):
-    params = {"lat": lat, "lon": lon}
-    jsonData = requests.get("http://api.openweathermap.org/data/2.5/weather}", params=params)
-    print(jsonData.status_code)
+    params = {"lat": lat, "lon": lon, "appid": api_key}
+    url = "http://api.openweathermap.org/data/2.5/weather"
+    Data = requests.get(url, params=params)
 
-# app = flask.Flask(__name__)
-# app.config["DEBUG"] = True
+    if (Data.status_code == 200):
+        return Data.__dict__
+    else:
+        return ""
+
+
+def parseData(weatherData):
+    # things i want: temp, feels like, min temp, max temp, wind speed
+    weatherDataBytes = weatherData.get('_content')
+    weatherDataDict = json.loads(weatherDataBytes.decode('utf-8'))
+
+    temp = weatherDataDict['main']['temp']
+    feels_like = weatherDataDict['main']['feels_like']
+    temp_min = weatherDataDict['main']['temp_min']
+    temp_max = weatherDataDict['main']['temp_max']
+
+    # Description
+    return (temp, feels_like, temp_min, temp_max)
 
 
 ident_name = "00AA"
 
 lat, lon = getGeoCoords(ident_name)
-getAirportData(lat, lon)
+# if lat == "" || lon == "":
 
 
-'''
-# Create some test data for our catalog in the form of a list of dictionaries.
-books = [
-    {'id': 0,
-     'title': 'A Fire Upon the Deep',
-     'author': 'Vernor Vinge',
-     'first_sentence': 'The coldsleep itself was dreamless.',
-     'year_published': '1992'},
-    {'id': 1,
-     'title': 'The Ones Who Walk Away From Omelas',
-     'author': 'Ursula K. Le Guin',
-     'first_sentence': 'With a clamor of bells that set the swallows soaring, the Festival of Summer came to the city Omelas, bright-towered by the sea.',
-     'published': '1973'},
-    {'id': 2,
-     'title': 'Dhalgren',
-     'author': 'Samuel R. Delany',
-     'first_sentence': 'to wound the autumnal city.',
-     'published': '1975'}
-]
+data = getAirportData(lat, lon)
+# if data is "":
+
+(temp, feels_liek, minTemp, maxTemp) = parseData(data)
 
 
-@app.route('/', methods=['GET'])
-def home():
-    return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
+# @app.route('/', methods=['GET'])
+# def home():
+#     return "<h1>Yonk</h1><p>This site is a prototype API for giving weather data for a specific airport.</p>"
 
 
-# A route to return all of the available entries in our catalog.
-@app.route('/api/v1/resources/books/all', methods=['GET'])
-def api_all():
-    return jsonify(books)
+# @app.route('/data/all', methods=['GET'])
+# def api_all():
+#     return jsonify(data)
 
 
-app.run()
-'''
+# app.run()
