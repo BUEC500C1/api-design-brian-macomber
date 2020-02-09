@@ -12,28 +12,15 @@ https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask
 https://www.dataquest.io/blog/python-api-tutorial/
 '''
 
-import csv
 import json
 import flask
 from flask import jsonify
 import requests
 from secret import api_key
+from getGeoCoords import getGeoCoords
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
-
-
-# using the ident code of an airport, get the geographical coordinates
-def getGeoCoords(ident):
-    with open('airports.csv', mode='r') as airports_csv:
-
-        csv_reader = csv.reader(airports_csv, delimiter=',')
-
-        for row in csv_reader:
-            if ident == row[1]:
-                return (row[4], row[5])
-
-    return ("", "")
 
 
 # using the latitude and longitude, the current weather of that airport is returned
@@ -83,7 +70,7 @@ def parseData(weatherData):
 @app.route('/api/current_weather', methods=['GET'])
 def user_api():
 
-    ident_name = "KIQ"
+    ident_name = "KJFK"
 
     lat, lon = getGeoCoords(ident_name)
 
