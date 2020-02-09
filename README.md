@@ -16,7 +16,7 @@ This API uses the ICAO code for each airport to return the current weather at th
 
 ### How to run:
 - Clone the github repository to your computer
-- Make sure the most recent version of python is installed
+- Make sure the most recent version of python is installed (https://www.python.org/downloads/)
 - On the command line run:
     `pip3 install -r requirements.txt`
 - Enter your api key in th secret_.py file given
