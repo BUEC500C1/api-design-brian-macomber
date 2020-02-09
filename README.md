@@ -6,7 +6,7 @@
 
 
 ### Objectives:
-- Develop an API and module that will get the current weather conditions from an airport
+- Develop an API and module that will get the current weather conditions for any USA airport
 - Integrate Continuous Build Process to check if the software in each development stage passed the build process. 
 - Integrate unit test and run the unit test in continuous integration process.
 
