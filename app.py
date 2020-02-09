@@ -1,10 +1,3 @@
-'''
-Brian Macomber - U25993688
-References:
-https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask
-https://www.dataquest.io/blog/python-api-tutorial/
-'''
-
 import json
 import flask
 from flask import jsonify
