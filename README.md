@@ -22,7 +22,7 @@
 - To use the API:
     `python3 app.py`
 - Got to the url `http://127.0.0.1:5000` to get the default weather for Boston
-- Go to the url `http://127.0.0.1:5000?ident=IDENT` and add the desired ident code for an airport where it says IDENT:
+- Go to the url `http://127.0.0.1:5000?ident=IDENT` and add the desired ident code for an airport where it says IDENT
 
 
 ### References:
