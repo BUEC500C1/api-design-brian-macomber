@@ -1,8 +1,8 @@
-# API Design
+# Weather API Design
 
 #### Brian Macomber 
-#### EC500 - Building Software
-#### Professor Osama Alshaykh
+##### EC500 - Building Software
+##### Professor Osama Alshaykh
 
 
 ### Objectives:
@@ -26,7 +26,7 @@ This API uses the ICAO code for each airport to return the current weather at th
 - Go to the url `http://127.0.0.1:5000/api/current_weather?ident=IDENT` and add the desired ident code for an airport where it says IDENT
 
 
-### References:
+#### References:
 - https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask
 - https://www.dataquest.io/blog/python-api-tutorial/
 - https://docs.python.org/3/library/csv.html
